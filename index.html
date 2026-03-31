@@ -43,16 +43,17 @@
             text-align: center;
             padding: 15px;
             margin-top: 40px;
-            <div class="alien" onclick="moveAlien()">👽</div>
         }
+
+        /* 외계인 스타일 */
         .alien {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    font-size: 22px;
-    cursor: pointer;
-    transition: all 0.5s ease;
-}
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
     </style>
 </head>
 <body>
@@ -107,8 +108,11 @@
 <footer>
     <p>© 2026 제주 감귤 체험 | jeju.tour.com</p>
 </footer>
-</body>
-    <script>
+
+<!-- 외계인 (footer 밖에 있어도 됨) -->
+<div class="alien" onclick="moveAlien()">👽</div>
+
+<script>
 function moveAlien() {
     const alien = document.querySelector('.alien');
     const x = Math.random() * (window.innerWidth - 50);
@@ -118,4 +122,6 @@ function moveAlien() {
     alien.style.top = y + 'px';
 }
 </script>
-</html> 
+
+</body>
+</html>
