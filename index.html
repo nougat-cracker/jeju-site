@@ -43,13 +43,22 @@
             text-align: center;
             padding: 15px;
             margin-top: 40px;
+            <div class="alien" onclick="moveAlien()">👽</div>
         }
+        .alien {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🍊 제주 감귤 따기 체험 👽</h1>
+    <h1>🍊 제주 감귤 따기 체험 🍊</h1>
     <p>직접 따고 맛보는 제주 농장 체험</p>
 </header>
 
@@ -98,6 +107,15 @@
 <footer>
     <p>© 2026 제주 감귤 체험 | jeju.tour.com</p>
 </footer>
-<!-- 제발 커밋 -->
 </body>
+    <script>
+function moveAlien() {
+    const alien = document.querySelector('.alien');
+    const x = Math.random() * (window.innerWidth - 50);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    alien.style.left = x + 'px';
+    alien.style.top = y + 'px';
+}
+</script>
 </html> 
