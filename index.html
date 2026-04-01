@@ -62,7 +62,6 @@
             cursor: pointer;
         }
 
-        /* 픽셀 말풍선 */
         .speech {
             position: fixed;
             background: white;
@@ -142,8 +141,8 @@
     <h2>📅 체험 안내</h2>
     <div class="info-box">
         <p><strong>운영 기간:</strong> 11월 ~ 2월</p>
-        <p><strong>체험 시간:</strong> 오전 10시 ~ 오후 5시</p>
-        <p><strong>소요 시간:</strong> 약 1시간</p>
+        <p><strong>체험 가능 시간:</strong> 오전 10시 ~ 오후 5시</p>
+        <p><strong>소요 시간:</strong> 약 1시간+@ (1통 / 약 2kg)</p>
         <p><strong>체험 비용:</strong> 1인 10,000원 (현장 결제)</p>
     </div>
 </div>
@@ -197,7 +196,7 @@ function spawnUFO() {
     ufo.textContent = '🛸';
     document.body.appendChild(ufo);
 
-    let dx = 4; // 속도 증가
+    let dx = 4; 
     let dy = 4;
 
     function randomizeDirection() {
@@ -228,7 +227,7 @@ function spawnUFO() {
 
         const rect = ufo.getBoundingClientRect();
 
-        showSpeech(rect.right + 5, rect.top); // 옆에 표시
+        showSpeech(rect.right + 5, rect.top); 
         ufo.classList.add('blink');
 
         setTimeout(() => {
@@ -257,7 +256,7 @@ function showSparkle(x, y) {
     sparkle.style.top = y + 'px';
     document.body.appendChild(sparkle);
 
-    setTimeout(() => sparkle.remove(), 2000);
+    setTimeout(() => sparkle.remove(), 1000);
 }
 </script>
 
