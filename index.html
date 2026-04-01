@@ -11,7 +11,7 @@
             background-color: #fffaf0;
         }
         header {
-            background-color: #a86608;
+            background-color: #ffb347;
             color: white;
             padding: 25px;
             text-align: center;
@@ -45,6 +45,7 @@
             margin-top: 40px;
         }
 
+        /* 👽 외계인 */
         .alien {
             position: fixed;
             bottom: 10px;
@@ -52,13 +53,55 @@
             font-size: 22px;
             cursor: pointer;
             transition: all 0.5s ease;
-
             -webkit-tap-highlight-color: transparent;
-            outline: none;
         }
 
-        .alien:focus {
-            outline: none;
+        /* 🛸 UFO */
+        .ufo {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            font-size: 30px;
+            animation: floatUFO 6s linear infinite;
+            cursor: pointer;
+        }
+
+        @keyframes floatUFO {
+            0% { left: -50px; }
+            100% { left: 100%; }
+        }
+
+        /* ✨ 효과 */
+        .sparkle {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+        }
+
+        /* 💬 도트 말풍선 */
+        .speech {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 2px solid black;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-family: monospace;
+            border-radius: 8px;
+        }
+
+        /* 깜빡임 */
+        .blink {
+            animation: blinkAnim 0.3s 3;
+        }
+
+        @keyframes blinkAnim {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
@@ -77,53 +120,68 @@
     <h2>🍊 체험 소개</h2>
     <p>
         제주도의 맑은 공기와 따뜻한 햇살 아래에서 자란 감귤을 직접 수확해보는 체험입니다.
-        가족, 친구, 연인과 함께 즐길 수 있으며 농장에서 바로 수확한 감귤을 맛볼 수 있습니다.
     </p>
-</div>
-
-<div class="section">
-    <h2>📅 체험 안내</h2>
-    <div class="info-box">
-        <p><strong>운영 기간:</strong> 11월 ~ 2월</p>
-        <p><strong>체험 시간:</strong> 오전 10시 ~ 오후 5시</p>
-        <p><strong>소요 시간:</strong> 약 1시간</p>
-        <p><strong>체험 비용:</strong> 1인 10,000원 (현장 결제)</p>
-    </div>
-</div>
-
-<div class="section">
-    <h2>📍 체험 내용</h2>
-    <ul>
-        <li>감귤 따는 방법 안내</li>
-        <li>농장 내 자유 수확 체험</li>
-        <li>수확한 감귤 시식</li>
-        <li>일부 감귤 포장 가능</li>
-    </ul>
-</div>
-
-<div class="section">
-    <h2>⚠️ 유의사항</h2>
-    <ul>
-        <li>편한 복장과 운동화를 착용해주세요</li>
-        <li>날씨에 따라 체험 일정이 변경될 수 있습니다</li>
-        <li>농장 내 안내 사항을 준수해주세요</li>
-    </ul>
 </div>
 
 <footer>
     <p>© 2026 제주 감귤 체험 | jeju.tour.com</p>
 </footer>
 
-<div class="alien" onclick="moveAlien()">👽</div>
+<!-- 👽 -->
+<div class="alien" id="alien">👽</div>
 
 <script>
-function moveAlien() {
-    const alien = document.querySelector('.alien');
+let clickCount = 0;
+const alien = document.getElementById('alien');
+
+alien.addEventListener('click', () => {
+    clickCount++;
+
+    // 위치 이동
     const x = Math.random() * (window.innerWidth - 50);
     const y = Math.random() * (window.innerHeight - 50);
-
     alien.style.left = x + 'px';
     alien.style.top = y + 'px';
+
+    if (clickCount >= 10) {
+        spawnUFO();
+        alien.remove();
+    }
+});
+
+function spawnUFO() {
+    const ufo = document.createElement('div');
+    ufo.className = 'ufo';
+    ufo.textContent = '🛸';
+    document.body.appendChild(ufo);
+
+    ufo.addEventListener('click', () => {
+        showSpeech();
+        ufo.classList.add('blink');
+
+        setTimeout(() => {
+            ufo.remove();
+            showSparkle();
+        }, 1000);
+    });
+}
+
+function showSpeech() {
+    const speech = document.createElement('div');
+    speech.className = 'speech';
+    speech.textContent = '앗, 잡혔다!!';
+    document.body.appendChild(speech);
+
+    setTimeout(() => speech.remove(), 1000);
+}
+
+function showSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.textContent = '✨';
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 3000);
 }
 </script>
 
