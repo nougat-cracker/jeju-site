@@ -11,14 +11,13 @@
             background-color: #fffaf0;
         }
         header {
-            background-color: #ffb347;
+            background-color: #A86608;
             color: white;
             padding: 25px;
             text-align: center;
         }
         .hero {
             background: url('https://source.unsplash.com/1600x600/?tangerine,jeju') no-repeat center/cover;
-            color: black;
             text-align: center;
             padding: 80px 20px;
         }
@@ -26,16 +25,6 @@
             padding: 40px 20px;
             max-width: 900px;
             margin: auto;
-            line-height: 1.6;
-        }
-        .section h2 {
-            color: #ffb347;
-        }
-        .info-box {
-            background-color: #fff3e0;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
         }
         footer {
             background-color: #ffb347;
@@ -45,63 +34,44 @@
             margin-top: 40px;
         }
 
-        /* 👽 외계인 */
         .alien {
             position: fixed;
             bottom: 10px;
             left: 10px;
             font-size: 22px;
             cursor: pointer;
-            transition: all 0.5s ease;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* 🛸 UFO */
         .ufo {
             position: fixed;
-            top: 50px;
-            left: 0;
+            top: 100px;
+            left: 100px;
             font-size: 30px;
-            animation: floatUFO 6s linear infinite;
             cursor: pointer;
         }
 
-        @keyframes floatUFO {
-            0% { left: -50px; }
-            100% { left: 100%; }
-        }
-
-        /* ✨ 효과 */
-        .sparkle {
-            position: fixed;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 30px;
-        }
-
-        /* 💬 도트 말풍선 */
         .speech {
             position: fixed;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
             background: white;
             border: 2px solid black;
-            padding: 10px 15px;
-            font-size: 14px;
+            padding: 10px;
             font-family: monospace;
             border-radius: 8px;
         }
 
-        /* 깜빡임 */
+        .sparkle {
+            position: fixed;
+            font-size: 30px;
+        }
+
         .blink {
             animation: blinkAnim 0.3s 3;
         }
 
         @keyframes blinkAnim {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            0%,100% {opacity:1;}
+            50% {opacity:0;}
         }
     </style>
 </head>
@@ -109,25 +79,12 @@
 
 <header>
     <h1>🍊 제주 감귤 따기 체험 🍊</h1>
-    <p>직접 따고 맛보는 제주 농장 체험</p>
 </header>
 
-<div class="hero">
-    <h2>달콤한 제주 감귤을 직접 수확해보세요!</h2>
-</div>
-
-<div class="section">
-    <h2>🍊 체험 소개</h2>
-    <p>
-        제주도의 맑은 공기와 따뜻한 햇살 아래에서 자란 감귤을 직접 수확해보는 체험입니다.
-    </p>
-</div>
-
 <footer>
-    <p>© 2026 제주 감귤 체험 | jeju.tour.com</p>
+    <p>© 2026 제주 감귤 체험</p>
 </footer>
 
-<!-- 👽 -->
 <div class="alien" id="alien">👽</div>
 
 <script>
@@ -137,7 +94,6 @@ const alien = document.getElementById('alien');
 alien.addEventListener('click', () => {
     clickCount++;
 
-    // 위치 이동
     const x = Math.random() * (window.innerWidth - 50);
     const y = Math.random() * (window.innerHeight - 50);
     alien.style.left = x + 'px';
@@ -155,33 +111,57 @@ function spawnUFO() {
     ufo.textContent = '🛸';
     document.body.appendChild(ufo);
 
+    let dx = 2;
+    let dy = 2;
+
+    function move() {
+        const rect = ufo.getBoundingClientRect();
+
+        if (rect.left <= 0 || rect.right >= window.innerWidth) dx *= -1;
+        if (rect.top <= 0 || rect.bottom >= window.innerHeight) dy *= -1;
+
+        ufo.style.left = rect.left + dx + 'px';
+        ufo.style.top = rect.top + dy + 'px';
+
+        ufo.moveInterval = requestAnimationFrame(move);
+    }
+    move();
+
     ufo.addEventListener('click', () => {
-        showSpeech();
+        cancelAnimationFrame(ufo.moveInterval);
+
+        const rect = ufo.getBoundingClientRect();
+
+        showSpeech(rect.left, rect.top);
         ufo.classList.add('blink');
 
         setTimeout(() => {
             ufo.remove();
-            showSparkle();
+            showSparkle(rect.left, rect.top);
         }, 1000);
     });
 }
 
-function showSpeech() {
+function showSpeech(x, y) {
     const speech = document.createElement('div');
     speech.className = 'speech';
     speech.textContent = '앗, 잡혔다!!';
+    speech.style.left = x + 'px';
+    speech.style.top = (y - 50) + 'px';
     document.body.appendChild(speech);
 
     setTimeout(() => speech.remove(), 1000);
 }
 
-function showSparkle() {
+function showSparkle(x, y) {
     const sparkle = document.createElement('div');
     sparkle.className = 'sparkle';
     sparkle.textContent = '✨';
+    sparkle.style.left = x + 'px';
+    sparkle.style.top = y + 'px';
     document.body.appendChild(sparkle);
 
-    setTimeout(() => sparkle.remove(), 3000);
+    setTimeout(() => sparkle.remove(), 1500);
 }
 </script>
 
