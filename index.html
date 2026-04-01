@@ -11,7 +11,7 @@
             background-color: #fffaf0;
         }
         header {
-            background-color: #ff8c00;
+            background-color: #e67600;
             color: white;
             padding: 25px;
             text-align: center;
@@ -29,7 +29,7 @@
             line-height: 1.6;
         }
         .section h2 {
-            color: #ff8c00;
+            color: #e67600;
         }
         .info-box {
             background-color: #fff3e0;
@@ -38,14 +38,13 @@
             margin-top: 20px;
         }
         footer {
-            background-color: #ff8c00;
+            background-color: #e67600;
             color: white;
             text-align: center;
             padding: 15px;
             margin-top: 40px;
         }
 
-        /* 외계인 스타일 */
         .alien {
             position: fixed;
             bottom: 10px;
@@ -53,6 +52,13 @@
             font-size: 22px;
             cursor: pointer;
             transition: all 0.5s ease;
+
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        .alien:focus {
+            outline: none;
         }
     </style>
 </head>
@@ -70,9 +76,8 @@
 <div class="section">
     <h2>🍊 체험 소개</h2>
     <p>
-        제주도의 맑은 공기와 따뜻한 햇살 아래에서 자란 감귤을 직접 수확해보는 특별한 체험입니다.
-        가족, 친구, 연인과 함께 즐기기 좋은 힐링 프로그램으로,
-        농장에서 바로 따서 신선한 감귤을 맛볼 수 있습니다.
+        제주도의 맑은 공기와 따뜻한 햇살 아래에서 자란 감귤을 직접 수확해보는 체험입니다.
+        가족, 친구, 연인과 함께 즐길 수 있으며 농장에서 바로 수확한 감귤을 맛볼 수 있습니다.
     </p>
 </div>
 
@@ -101,7 +106,7 @@
     <ul>
         <li>편한 복장과 운동화를 착용해주세요</li>
         <li>날씨에 따라 체험 일정이 변경될 수 있습니다</li>
-        <li>농장 내에서는 안내 사항을 꼭 지켜주세요</li>
+        <li>농장 내 안내 사항을 준수해주세요</li>
     </ul>
 </div>
 
@@ -109,7 +114,6 @@
     <p>© 2026 제주 감귤 체험 | jeju.tour.com</p>
 </footer>
 
-<!-- 외계인 (footer 밖에 있어도 됨) -->
 <div class="alien" onclick="moveAlien()">👽</div>
 
 <script>
